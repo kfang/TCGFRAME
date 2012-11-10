@@ -28,10 +28,9 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 });
 
 function get_game_id() {
-	var kvpairs = document.cookie.split(";");
+	var kvpairs = document.cookie.split("; ");
 	for (i in kvpairs) {
 		kvpair = kvpairs[i].split("=");
-		kvpair[0] = kvpair[0].replace(/\s+/g, '');
 		if (kvpair[0] === "gameid") {
 			return kvpair[1];
 		}
@@ -39,10 +38,14 @@ function get_game_id() {
 }
 
 function receive_broadcast(event) {
+	if (event.id !== undefined) {
+		// Bad ids (some sort of response packet)
+		return;
+	}
 	var data = event.data;
 	var ul = document.getElementById("user_list");
 	ul.innerHTML = "\n";
 	for (i in data) {
-		ul.innerHTML += "<li>" + pplList[i] + "</li>\n";
+		ul.innerHTML += "<li>" + data[i] + "</li>\n";
 	}
 }

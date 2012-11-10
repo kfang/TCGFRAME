@@ -31,10 +31,10 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 });
 
 function get_username() {
-	var kvpairs = document.cookie.split(";");
+	var kvpairs = document.cookie.split("; ");
 	for (i in kvpairs) {
 		kvpair = kvpairs[i].split("=");
-		kvpair[0] = kvpair[0].replace(/\s+/g, '');
+//		kvpair[0] = kvpair[0].replace(/\s+/g, '');
 		if (kvpair[0] === "uName") {
 			return kvpair[1];
 		}
@@ -43,8 +43,9 @@ function get_username() {
 
 function receive_broadcast(event) {
 	if (event.id === "start") {
-		document.cookie = "gameid=" + event.data;
-		console.log("got start");
+		document.cookie = "gameid=" + event.data + "; path=/";
+		document.getElementById("game_form").submit();
+		
 	}
 	else if (event.id !== undefined) {
 		// Then it wasn't our message
