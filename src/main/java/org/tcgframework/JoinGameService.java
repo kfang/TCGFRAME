@@ -80,7 +80,10 @@ public class JoinGameService {
 		
 		if (message.getData().toString().equals("list_users")){
 			System.out.println("Channel: " + message.getChannel());
-			sender.deliver(this.session, message.getChannel(), state.usernames, null);
+			sender.deliver(this.session, message.getChannel(), state.players, null);
+		}
+		else if(message.getData().toString().equals("next_phase")){
+			
 		}
 	}
 	
