@@ -52,7 +52,7 @@ public class DominionGameState implements GameState{
 	
 	public void doCard(String card){
 		Card cardObject = hand.get(card);
-		cardObject.doCard();
+		cardObject.doCard(this);
 		inPlay.add(cardObject);
 	}
 	

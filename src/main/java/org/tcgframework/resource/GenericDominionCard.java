@@ -8,8 +8,8 @@ public class GenericDominionCard implements Card{
 		this.name = name;
 	}
 
-	public void doCard() {
-		// TODO Auto-generated method stub
+	public void doCard(GameState state) {
+		DominionGameState DState = (DominionGameState) state;
 		
 	}
 }

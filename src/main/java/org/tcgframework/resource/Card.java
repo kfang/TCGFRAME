@@ -2,5 +2,5 @@ package org.tcgframework.resource;
 
 public interface Card {
 	
-	public void doCard();
+	public void doCard(GameState state);
 }

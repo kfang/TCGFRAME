@@ -93,8 +93,12 @@ public class JoinGameService {
 			Map<String, Object> map = message.getDataAsMap();
 			if (map.containsKey("do_card")){
 				state.doCard((String) map.get("do_card"));
+				ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
+				broadcastChannel.publish(this.session, state, "gamestate");
 			} else if (map.containsKey("phase_change")){
 				state.nextPhase((Integer) map.get("phase_change"));
+				ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
+				broadcastChannel.publish(this.session, state, "gamestate");
 			}
 		}
 	}
