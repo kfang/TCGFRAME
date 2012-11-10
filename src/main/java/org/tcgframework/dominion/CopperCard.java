@@ -13,6 +13,8 @@ public class CopperCard implements Card {
 		int treasure = (Integer) player.states.get("treasure");
 		treasure += 1;
 		player.states.put("treasure", treasure);
+		
+		((DominionGameState) state).money++;
 	}
 	
 	public boolean canPlay(GameState state){
