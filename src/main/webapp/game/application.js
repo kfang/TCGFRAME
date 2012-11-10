@@ -1,7 +1,13 @@
 var subscribed = false;
 var ismyturn = false;
+var changePhase;
 require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 {
+    changePhase = function(phase) {
+        cometd.publish('/game/' + gameid, {
+        	phase_change: phase
+        });
+    }
     cometd.configure({
         url: location.protocol + '//' + location.host + config.contextPath + '/cometd',
         logLevel: 'info'
@@ -41,9 +47,17 @@ var gameid = get_game_id();
 function receive_broadcast(event) {
 	if (event.id === "gamestate") {
 		// Display the gamestate stuff
-		var data = event.data;
-		var gs = document.getElementById("game_state");
-		gs.innerHTML = "\n";
+		var data = JSON.parse(event.data);
+		var phdiv = document.getElementById("phases");
+		phases.innerHTML = "\n";
+		for (i in data.phases) {
+			var butt = "<button ";
+			if (i <= data.currentPhase) {
+				butt += "disabled='disabled'";
+			}
+			butt += " onclick='changePhase(" + i + ");'>" + data.phases[i] + "</button>\n";
+			phases.innerHTML += butt;
+		}
 	} else if (event.id === "message") {
 		var data = event.data;
 		var ms = document.getElementById("message");
