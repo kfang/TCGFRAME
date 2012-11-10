@@ -1,8 +1,14 @@
 var subscribed = false;
 var ismyturn = false;
 var changePhase;
+var doCard;
 require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 {
+	doCard = function(card) {
+		cometd.publish('/game/' + gameid, {
+			do_card: card
+		});
+	}
     changePhase = function(phase) {
         cometd.publish('/game/' + gameid, {
         	phase_change: phase
@@ -66,12 +72,12 @@ function receive_broadcast(event) {
 		var handDiv = document.getElementById("hand");
 		handDiv.innerHTML = "in hand:\n";
 		for (i in data.hand) {
-			handDiv.innerHTML += "<img width='148px' height='237px' border='0' src='cards/" + data.hand[i] + ".jpg' alt='" + data.hand[i] + "'/>";
+			handDiv.innerHTML += "<img onclick='doCard(\"" + data.hand[i] + "\");' width='148px' height='237px' border='0' src='cards/" + data.hand[i] + ".jpg' alt='" + data.hand[i] + "'/>";
 		}
 		var playDiv = document.getElementById("play");
 		playDiv.innerHTML = "in play:\n"
-		for (i in data.play) {
-			playDiv.innerHTML += "<img width='148px' height='237px' border='0' src='cards/" + data.play[i] + ".jpg' alt='" + data.play[i] + "'/>";
+		for (i in data.inPlay) {
+			playDiv.innerHTML += "<img width='148px' height='237px' border='0' src='cards/" + data.inPlay[i] + ".jpg' alt='" + data.inPlay[i] + "'/>";
 		}
 	} else if (event.id === "message") {
 		var data = event.data;
