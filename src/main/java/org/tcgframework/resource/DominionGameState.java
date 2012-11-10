@@ -12,8 +12,9 @@ public class DominionGameState implements GameState{
 	private int currentPlayer;
 	private int currentPhase;
 	public ArrayList<String> phases = new ArrayList<String>();
-	public HashMap<String, Card> hand = new HashMap<String, Card>();
+	public ArrayList<String> hand = new ArrayList<String>();
 	public ArrayList<Card> inPlay = new ArrayList<Card>();
+	public ArrayList<Player> playerObj = new ArrayList<Player>();
 	
 	public DominionGameState(int gameID, HashSet<String> usernames){
 		this.gameID = gameID;
@@ -21,6 +22,7 @@ public class DominionGameState implements GameState{
 		//add all the users
 		for (String name : usernames){
 			this.players.add(name);
+			this.playerObj.add(new DominionPlayer(name));
 		}
 		currentPlayer = 0;
 		
@@ -30,11 +32,7 @@ public class DominionGameState implements GameState{
 		phases.add("Buy Phase");
 		phases.add("Cleanup Phase");
 		
-		//make a hand 
-		//TODO: actually create a hand
-		hand.put("blah", new GenericDominionCard("blah"));
-		hand.put("meh", new GenericDominionCard("meh"));
-		hand.put("ahhhh", new GenericDominionCard("ahhhh"));
+		this.hand = ((DominionPlayer) playerObj.get(currentPlayer)).hand;
 	}
 	
 	public String getCurrentPlayer(){
