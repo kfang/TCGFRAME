@@ -24,7 +24,7 @@ public class JoinGameService {
 	HashMap<String, Object> users = new HashMap<String, Object>();
 	HashSet<String> usernames = new HashSet<String>();
 	HashMap<String, DominionGameState> games = new HashMap<String, DominionGameState>();
-	int gameID = 0;
+	int gameID = 1;
 	
 	@Session
 	private ServerSession session;
@@ -56,7 +56,7 @@ public class JoinGameService {
 	@Listener("/broadcast/startgame")
 	public void startGame(ServerSession session, ServerMessage message){
 		//add a new game to games
-		games.put("/game/"+ this.gameID, new DominionGameState(this.gameID, usernames));
+		games.put("/game/"+ this.gameID, new DominionGameState(this.gameID, (HashSet<String>) usernames.clone()));
 		
 		//broadcast to all users that a new game started
 		this.bayeux.createIfAbsent("/broadcast/waiting");
