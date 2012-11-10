@@ -31,7 +31,7 @@ public class ClientHelloService {
     	games.put(sender.getId(), new DominionGameState(sender.getId()));
         System.out.printf("Received greeting '%s' from remote client %s%n", message.getData(), sender.getId());
     }
-	
+    
     @Listener("/service/games")
     public void getGames(ServerSession sender, ServerMessage message) {
     	System.out.println("There are " + games.size() + " games available");
