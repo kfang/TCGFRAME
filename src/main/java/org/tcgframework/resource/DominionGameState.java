@@ -12,7 +12,8 @@ public class DominionGameState implements GameState{
 	private int currentPlayer;
 	private int currentPhase;
 	public ArrayList<String> phases = new ArrayList<String>();
-	public ArrayList<Card> playset = new ArrayList<Card>();
+	public HashMap<String, Card> hand = new HashMap<String, Card>();
+	public ArrayList<Card> inPlay = new ArrayList<Card>();
 	
 	public DominionGameState(int gameID, HashSet<String> usernames){
 		this.gameID = gameID;
@@ -29,10 +30,11 @@ public class DominionGameState implements GameState{
 		phases.add("Buy Phase");
 		phases.add("Cleanup Phase");
 		
-		//create the playset
-		playset.add(new GenericDominionCard("blah"));
-		playset.add(new GenericDominionCard("meh"));
-		playset.add(new GenericDominionCard("ahhhh"));
+		//make a hand 
+		//TODO: actually create a hand
+		hand.put("blah", new GenericDominionCard("blah"));
+		hand.put("meh", new GenericDominionCard("meh"));
+		hand.put("ahhhh", new GenericDominionCard("ahhhh"));
 	}
 	
 	public String getCurrentPlayer(){
@@ -48,6 +50,12 @@ public class DominionGameState implements GameState{
 		currentPhase = currentPhase % phases.size();
 	}
 	
+	public void doCard(String card){
+		Card cardObject = hand.get(card);
+		cardObject.doCard();
+		inPlay.add(cardObject);
+	}
+	
 
 	@Override
 	public String toString() {
@@ -56,9 +64,11 @@ public class DominionGameState implements GameState{
 		toReturn.put("currentPlayer", this.currentPlayer);
 		toReturn.put("currentPhase", this.currentPhase);
 		toReturn.put("phases", this.phases);
+		toReturn.put("players", this.players);
+		toReturn.put("inPlay", this.inPlay);
 		
 		//TODO: make toString for Cards
-		toReturn.put("playset", this.playset);
+		toReturn.put("hand", this.hand);
 		Gson gson = new Gson();
 		return gson.toJson(toReturn);
 	}
