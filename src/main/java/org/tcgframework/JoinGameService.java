@@ -11,11 +11,15 @@ import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
+import org.tcgframework.resource.DominionGameState;
+import org.tcgframework.resource.GameState;
 
 @Service
 public class JoinGameService {
-
+	
+	//Instance Variables
 	ArrayList<String> users = new ArrayList<String>();
+	ArrayList<GameState> games = new ArrayList<GameState>();
 	
 	@Session
 	private ServerSession session;
@@ -38,6 +42,8 @@ public class JoinGameService {
 	//whenever owner starts a game
 	@Listener("/service/startgame")
 	public void startGame(ServerSession session, ServerMessage message){
+		//add a new game to games
+		games.add(new DominionGameState(message.getClientId()));
 		
 	}
 	
