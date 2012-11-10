@@ -17,9 +17,14 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     	}
     });
     
+    cometd.addListener('/broadcast/games', function(message){
+    	console.log(message);
+    });
+    
     dom.byId('greeter').onclick = function()
     {
-        cometd.publish('/service/hello', 'Hello, World');
+        cometd.publish('/service/hello', 'John Smith');
+        cometd.publish('/service/games', 'John Smith');
     };
     
     cometd.handshake();

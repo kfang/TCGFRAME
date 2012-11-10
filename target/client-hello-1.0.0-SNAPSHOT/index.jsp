@@ -23,6 +23,11 @@
         <button id="greeter">
         Send Hello to Server
     </button>
+    
+    <h3>Game List:</h3>
+    <div id="games_list">
+    emptylist
+    </div>
 
 </body>
 </html>

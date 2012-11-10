@@ -1,7 +1,9 @@
 Manifest-Version: 1.0
-Export-Package: org.cometd.tutorials;uses:="org.cometd.annotation,org.
- cometd.bayeux.server";version="1.0.0.SNAPSHOT",org.tcgframework.resou
- rce;version="1.0.0.SNAPSHOT"
+Export-Package: org.cometd.tutorials;uses:="org.tcgframework.resource,
+ org.cometd.annotation,org.cometd.bayeux.server,javax.inject,org.comet
+ d.bayeux";version="1.0.0.SNAPSHOT",org.tcgframework;uses:="org.cometd
+ .bayeux.server,org.cometd.annotation,javax.inject";version="1.0.0.SNA
+ PSHOT",org.tcgframework.resource;version="1.0.0.SNAPSHOT"
 Built-By: Fangs
 Tool: Bnd-1.43.0
 Bundle-Name: client-hello
@@ -10,14 +12,15 @@ Bundle-Vendor: Dojo Foundation
 Bundle-ContactAddress: http://cometd.org/client-hello
 Build-Jdk: 1.7.0_07
 Bundle-Version: 1.0.0.SNAPSHOT
-Bnd-LastModified: 1352524496008
+Bnd-LastModified: 1352542752489
 Bundle-ManifestVersion: 2
 Bundle-Description: The CometD project is a scalable web messaging bus
   that uses WebSocketand HTTP AJAX push technology patterns known as "
  Comet" techniques
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0
 Bundle-SymbolicName: client-hello
-Import-Package: org.cometd.annotation;version="[2.5,3)",org.cometd.bay
- eux.server;version="[2.5,3)"
+Import-Package: javax.inject,org.cometd.annotation;version="[2.5,3)",o
+ rg.cometd.bayeux;version="[2.5,3)",org.cometd.bayeux.server;version="
+ [2.5,3)"
 Bundle-DocURL: http://docs.cometd.org
 

@@ -68,6 +68,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <button id=\"greeter\">\r\n");
       out.write("        Send Hello to Server\r\n");
       out.write("    </button>\r\n");
+      out.write("    \r\n");
+      out.write("    <h3>Game List:</h3>\r\n");
+      out.write("    <div id=\"games_list\">\r\n");
+      out.write("    emptylist\r\n");
+      out.write("    </div>\r\n");
       out.write("\r\n");
       out.write("</body>\r\n");
       out.write("</html>\r\n");
