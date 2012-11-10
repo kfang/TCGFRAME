@@ -32,13 +32,11 @@ public class DominionPlayer implements Player{
 	
 	public void draw(int draws){
 		for(int i = 0; i < draws; i++){
-			String c = deck.remove(0);
-			if (c == null){
+			if (deck.size() == 0) {
 				deck.addAll(discard);
 				discard.clear();
-			} else {
-				hand.add(c);
 			}
+			hand.add(deck.remove(0));
 		}
 	}
 

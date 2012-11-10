@@ -74,7 +74,7 @@ public class DominionGameState implements GameState{
 	}
 	
 	public void passTurn(){
-		playerObj.get(currentPlayer).cleanup();
+		cleanup();
 		currentPhase = 0;
 		currentPlayer = (currentPlayer + 1) % players.size();
 		actions = 1;

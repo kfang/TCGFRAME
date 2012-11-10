@@ -21,6 +21,7 @@
 		<div id="play"></div>
 		<div id="hand"></div>
 	</div>
+	<div id="message"></div>
 </body>
 
 </html>

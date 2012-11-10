@@ -6,5 +6,4 @@ public interface Player {
 	
 	public HashMap<String, Object> states = new HashMap<String, Object>();
 
-	void cleanup();
 }
