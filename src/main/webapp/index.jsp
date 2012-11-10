@@ -21,18 +21,6 @@
 	<div class="container centered hero-unit">
 		<h1 class="page-header">Join a Game</h1>
 
-    <h2>CometD Tutorial</h2>
-
-    <div id="status"></div>
-        <button id="greeter">
-        Send Hello to Server
-    </button>
-    
-    <h3>Game List:</h3>
-    <div id="games_list">
-    emptylist
-    </div>
-
 		<div class="input">
 			<form action="waiting" onsubmit="get_a_group();" method="post">
 				<div>
