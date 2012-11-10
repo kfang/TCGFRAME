@@ -78,11 +78,17 @@ public class JoinGameService {
 		DominionGameState state = games.get(message.getChannel());
 		
 		
-		if (message.getData().toString().equals("list_users")){
+		if (message.getData().toString().equals("iam_ready")){
 			System.out.println("Channel: " + message.getChannel());
 			sender.deliver(this.session, message.getChannel(), state.players, null);
-		}
-		else if(message.getData().toString().equals("next_phase")){
+		} else if (message.getData().toString().equals("phase_change")){
+			//progress phase
+			state.nextPhase();
+			
+			//send gamestate
+			ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
+			broadcastChannel.publish(this.session, state, "gamestate");
+		} else if (message.getData().toString().equals("do_card")){
 			
 		}
 	}
