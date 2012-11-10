@@ -14,6 +14,7 @@
 <body>
 	<h1>Game Page</h1>
 	<div id="gs">
+		<div id="supply"></div>
 		<div id="phases"></div>
 		<div id="stats"></div>
 		<div id="play"></div>
