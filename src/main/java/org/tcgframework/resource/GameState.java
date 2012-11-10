@@ -1,5 +1,10 @@
 package org.tcgframework.resource;
 
-public class GameState {
+import java.util.ArrayList;
 
+public interface GameState {
+	
+	//player list
+	public ArrayList<String> players = new ArrayList<String>();
+	
 }
