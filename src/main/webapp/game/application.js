@@ -14,7 +14,7 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     		console.log('CometD handshake successful');
     		if (!subscribed) {
     			cometd.subscribe('/game/' + gameid, receive_broadcast);
-    			cometd.publish('/game/' + gameid, "list_users");
+    			cometd.publish('/game/' + gameid, "iam_ready");
     			subscribed = true;
     		}
     	}
