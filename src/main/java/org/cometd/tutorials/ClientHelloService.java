@@ -28,7 +28,7 @@ public class ClientHelloService {
     @Listener("/service/hello")
     public void processClientHello(ServerSession sender, ServerMessage message)
     {	
-    	games.put(sender.getId(), new DominionGameState(sender.getId(), null));
+    	games.put(sender.getId(), new DominionGameState(0, null));
         System.out.printf("Received greeting '%s' from remote client %s%n", message.getData(), sender.getId());
     }
     
