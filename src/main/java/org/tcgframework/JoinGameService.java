@@ -97,6 +97,8 @@ public class JoinGameService {
 				Card card = state.cardObjSet.get((String) map.get("do_card"));
 				String can = card.canPlay(state);
 				if (can.equals(Card.VALID)) {
+					state.hand.remove(card.name);
+					state.inPlay.add(card.name);
 					card.doCard(state);
 					ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
 					broadcastChannel.publish(this.session, state, "gamestate");

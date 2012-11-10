@@ -1,9 +1,10 @@
 package org.tcgframework.resource;
 
-public interface Card {
+public abstract class Card {
 	
 	public static final String VALID = "valid";
+	public String name;
 	
-	public void doCard(GameState state);
-	public String canPlay(GameState state);
+	public abstract void doCard(GameState state);
+	public abstract String canPlay(GameState state);
 }

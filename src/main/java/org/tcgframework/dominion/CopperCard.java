@@ -5,8 +5,12 @@ import org.tcgframework.resource.DominionGameState;
 import org.tcgframework.resource.GameState;
 import org.tcgframework.resource.Player;
 
-public class CopperCard implements Card {
-
+public class CopperCard extends Card {
+	
+	public CopperCard(){
+		this.name = "copper";
+	}
+	
 	public void doCard(GameState state) {
 		DominionGameState Dstate = (DominionGameState) state;
 		Player player = Dstate.playerObj.get(Dstate.currentPlayer);
