@@ -80,4 +80,8 @@ public class DominionGameState implements GameState{
 		DominionGameState state = new DominionGameState(0, usernames);
 		System.out.println(state.toString());
 	}
+
+	public void nextPhase(Integer integer) {
+		currentPhase = integer;
+	}
 }

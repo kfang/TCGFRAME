@@ -92,8 +92,9 @@ public class JoinGameService {
 		} else {
 			Map<String, Object> map = message.getDataAsMap();
 			if (map.containsKey("do_card")){
-				state.doCard((String)map.get("do_card"));
-				
+				state.doCard((String) map.get("do_card"));
+			} else if (map.containsKey("phase_change")){
+				state.nextPhase((Integer) map.get("phase_change"));
 			}
 		}
 	}
