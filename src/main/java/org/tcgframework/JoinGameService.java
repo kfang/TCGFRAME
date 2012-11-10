@@ -3,6 +3,7 @@ package org.tcgframework;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -88,8 +89,12 @@ public class JoinGameService {
 			//send gamestate
 			ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
 			broadcastChannel.publish(this.session, state, "gamestate");
-		} else if (message.getData().toString().equals("do_card")){
-			
+		} else {
+			Map<String, Object> map = message.getDataAsMap();
+			if (map.containsKey("do_card")){
+				state.doCard((String)map.get("do_card"));
+				
+			}
 		}
 	}
 	
