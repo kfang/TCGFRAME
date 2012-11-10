@@ -12,7 +12,7 @@ Bundle-Vendor: Dojo Foundation
 Bundle-ContactAddress: http://cometd.org/client-hello
 Build-Jdk: 1.7.0_07
 Bundle-Version: 1.0.0.SNAPSHOT
-Bnd-LastModified: 1352542752489
+Bnd-LastModified: 1352542974808
 Bundle-ManifestVersion: 2
 Bundle-Description: The CometD project is a scalable web messaging bus
   that uses WebSocketand HTTP AJAX push technology patterns known as "
