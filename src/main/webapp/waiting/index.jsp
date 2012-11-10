@@ -8,12 +8,12 @@
         var config = {
             contextPath: '${pageContext.request.contextPath}'
         };
-    </script>
+   </script>
 </head>
 
 <body>
 	<h1>Waiting Page</h1>
-	<div id="username"></div>
+	<ul id="user_list"></ul>
 	<div><button id="hello_server">Hello, Server</button></div>
 </body>
 

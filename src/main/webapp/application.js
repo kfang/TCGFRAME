@@ -20,12 +20,6 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     		dom.byId('status').innerHTML += '<div>CometD handshake failed</div>';
     	}
     });
-    
-
-    dom.byId('greeter').onclick = function()
-    {
-        cometd.publish('/broadcast/waiting', 'John Smith');
-    };
 
     cometd.handshake();
 });
