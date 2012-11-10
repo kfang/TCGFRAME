@@ -1,6 +1,7 @@
 package org.tcgframework.resource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class DominionGameState implements GameState{
@@ -25,6 +26,8 @@ public class DominionGameState implements GameState{
 		phases.add("Action Phase");
 		phases.add("Buy Phase");
 		phases.add("Cleanup Phase");
+		
+		//create the playset
 	}
 	
 	public String getCurrentPlayer(){
@@ -38,6 +41,21 @@ public class DominionGameState implements GameState{
 	public void nextPhase(){
 		currentPhase++;
 		currentPhase = currentPhase % phases.size();
+	}
+	
+
+	@Override
+	public String toString() {
+		HashMap<String, Object> toReturn = new HashMap<String, Object>();
+		toReturn.put("gameID", this.gameID);
+		toReturn.put("currentPlayer", this.currentPlayer);
+		toReturn.put("currentPhase", this.currentPhase);
+		toReturn.put("phases", this.phases);
+		
+		//TODO: make toString for Cards
+		toReturn.put("playset", this.playset);
+		
+		return toReturn.toString();
 	}
 	
 }
