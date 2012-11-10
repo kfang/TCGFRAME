@@ -65,7 +65,7 @@ public class JoinGameService {
 		//empty out the users list
 		users.clear();
 		usernames.clear();
-		System.out.println("Game has started, Users has been cleared");
+		System.out.println("Game has started, Users have been cleared");
 	}
 	
 	//GAME LISTENERS

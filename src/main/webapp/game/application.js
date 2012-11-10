@@ -1,10 +1,7 @@
 var subscribed = false;
-var send_start;
+var ismyturn = false;
 require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 {
-	send_start = function() {
-		cometd.publish('/broadcast/startgame', 'start');
-	}
     cometd.configure({
         url: location.protocol + '//' + location.host + config.contextPath + '/cometd',
         logLevel: 'info'
@@ -16,8 +13,8 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     	{
     		console.log('CometD handshake successful');
     		if (!subscribed) {
-    			cometd.subscribe('/broadcast/waiting', receive_broadcast);
-    			cometd.publish('/broadcast/waiting', get_username());
+    			cometd.subscribe('/game/' + get_game_id(), receive_broadcast);
+    			cometd.publish('/game/' + get_game_id(), "list_users");
     			subscribed = true;
     		}
     	}
@@ -30,36 +27,22 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     cometd.handshake();
 });
 
-function get_username() {
+function get_game_id() {
 	var kvpairs = document.cookie.split(";");
 	for (i in kvpairs) {
 		kvpair = kvpairs[i].split("=");
 		kvpair[0] = kvpair[0].replace(/\s+/g, '');
-		if (kvpair[0] === "uName") {
+		if (kvpair[0] === "gameid") {
 			return kvpair[1];
 		}
 	}
 }
 
 function receive_broadcast(event) {
-	if (event.id === "start") {
-		document.cookie = "gameid=" + event.data;
-		
-	}
-	else if (event.id !== undefined) {
-		// Then it wasn't our message
-		return;
-	}
-	var pplList = event.data["USERS"];
+	var data = event.data;
 	var ul = document.getElementById("user_list");
-	// List all the peeps in the ul.
 	ul.innerHTML = "\n";
-	for (i in pplList) {
+	for (i in data) {
 		ul.innerHTML += "<li>" + pplList[i] + "</li>\n";
-	}
-	// If I am the first person in the list, I get to choose to start the game.
-	if (event.data["OWNER"] === get_username()) {
-		var bDiv = document.getElementById("start_game");
-		bDiv.innerHTML = "\n<button onclick='send_start();'>Start Game</button>\n";
 	}
 }
