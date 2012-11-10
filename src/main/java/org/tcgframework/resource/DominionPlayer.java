@@ -21,6 +21,8 @@ public class DominionPlayer implements Player{
 		Player.states.put("treasure", 0);
 		Player.states.put("buys", 1);
 		
+		//TOOD: this shouldn't actually be how you populate your deck,
+		//but it works for now
 		for (int i = 0; i < 10; i++){
 			deck.add("copper");
 		}

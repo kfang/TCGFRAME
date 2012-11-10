@@ -8,12 +8,16 @@ import com.google.gson.Gson;
 
 public class DominionGameState implements GameState{
 	
+	public int actions;
+	public int buys;
+	public int money;
+	
 	public int gameID;
-	private int currentPlayer;
-	private int currentPhase;
+	public int currentPlayer;
+	public int currentPhase;
 	public ArrayList<String> phases = new ArrayList<String>();
 	public ArrayList<String> hand = new ArrayList<String>();
-	public ArrayList<Card> inPlay = new ArrayList<Card>();
+	public ArrayList<String> inPlay = new ArrayList<String>();
 	public ArrayList<Player> playerObj = new ArrayList<Player>();
 	
 	public DominionGameState(int gameID, HashSet<String> usernames){
@@ -49,9 +53,11 @@ public class DominionGameState implements GameState{
 	}
 	
 	public void doCard(String card){
-//		Card cardObject = hand.get(card);
-//		cardObject.doCard(this);
-//		inPlay.add(cardObject);
+		//add to in play
+		inPlay.add(card);
+		
+		//remove from hand
+		this.playerObj.indexOf(card);
 	}
 	
 
@@ -64,6 +70,9 @@ public class DominionGameState implements GameState{
 		toReturn.put("phases", this.phases);
 		toReturn.put("players", this.players);
 		toReturn.put("inPlay", this.inPlay);
+		toReturn.put("actions", this.actions);
+		toReturn.put("buys", this.buys);
+		toReturn.put("money", this.money);
 		
 		//TODO: make toString for Cards
 		toReturn.put("hand", this.hand);
