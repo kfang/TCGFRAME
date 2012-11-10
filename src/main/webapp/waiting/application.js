@@ -1,3 +1,5 @@
+var subscribed = false;
+
 require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 {
     cometd.configure({
@@ -10,8 +12,11 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     	if (message.successful)
     	{
     		console.log('<div>CometD handshake successful</div>');
-    	    cometd.publish('/broadcast/waiting', get_username());
-    		cometd.subscribe('/broadcast/waiting', update_users);
+    		if (!subscribed) {
+    			cometd.subscribe('/broadcast/waiting', update_users);
+    			cometd.publish('/broadcast/waiting', get_username());
+    			subscribed = true;
+    		}
     	}
     	else
     	{
@@ -35,6 +40,10 @@ function get_username() {
 
 function update_users(event) {
 	var pplList = event.data;
+	if (event.data !== undefined) {
+		// Then it wasn't our message
+		return;
+	}
 	var ul = document.getElementById("user_list");
 	// List all the peeps in the ul.
 	ul.innerHTML = "\n";
