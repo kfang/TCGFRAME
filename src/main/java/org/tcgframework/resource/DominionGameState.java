@@ -46,6 +46,9 @@ public class DominionGameState implements GameState{
 		phases.add("Action Phase");
 		phases.add("Buy Phase");
 		phases.add("Cleanup Phase");
+		actions = 1;
+		buys = 1;
+		money = 0;
 		
 		this.hand = ((DominionPlayer) playerObj.get(currentPlayer)).hand;
 	}
@@ -65,22 +68,18 @@ public class DominionGameState implements GameState{
 	
 	public void nextPhase(Long long1) {
 		currentPhase = (int) (long) long1;
-	}
-	
-	public void doCard(String card){
-		//add to in play
-		inPlay.add(card);
-		
-		//remove from hand
-		this.hand.remove(card);
-		
-		//do what the card does
-		this.cardObjSet.get(card).doCard(this);	
+		if (currentPhase == 2) {
+			passTurn();
+		}
 	}
 	
 	public void passTurn(){
 		playerObj.get(currentPlayer).cleanup();
+		currentPhase = 0;
 		currentPlayer += 1;
+		actions = 1;
+		buys = 1;
+		money = 0;
 		this.hand = ((DominionPlayer) playerObj.get(currentPlayer)).hand;
 		inPlay.clear();
 	}

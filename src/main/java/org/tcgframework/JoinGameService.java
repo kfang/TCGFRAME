@@ -15,6 +15,7 @@ import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
+import org.tcgframework.resource.Card;
 import org.tcgframework.resource.DominionGameState;
 import org.tcgframework.resource.GameState;
 
@@ -93,9 +94,15 @@ public class JoinGameService {
 			Map<String, Object> map = message.getDataAsMap();
 			System.out.println("Received map: " + map);
 			if (map.containsKey("do_card")){
-				state.doCard((String) map.get("do_card"));
-				ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
-				broadcastChannel.publish(this.session, state, "gamestate");
+				Card card = state.cardObjSet.get((String) map.get("do_card"));
+				String can = card.canPlay(state);
+				if (can.equals(Card.VALID)) {
+					card.doCard(state);
+					ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
+					broadcastChannel.publish(this.session, state, "gamestate");
+				} else {
+					sender.deliver(this.session, message.getChannel(), can, "message");
+				}
 			} else if (map.containsKey("phase_change")){
 				System.out.println("Sending a phase change.");
 				state.nextPhase((Long) map.get("phase_change"));

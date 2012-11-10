@@ -17,9 +17,13 @@ public class CopperCard implements Card {
 		((DominionGameState) state).money++;
 	}
 	
-	public boolean canPlay(GameState state){
+	public String canPlay(GameState state){
 		DominionGameState Dstate = (DominionGameState) state;
-		return Dstate.currentPhase == 1;
+		if(Dstate.currentPhase != 1){
+			return "Wrong Phase, must play in Buy Phase";
+		} else {
+			return Card.VALID;
+		}
 	}
 
 }
