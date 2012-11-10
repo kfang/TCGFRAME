@@ -2,6 +2,8 @@ package org.tcgframework;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -19,7 +21,8 @@ import org.tcgframework.resource.GameState;
 public class JoinGameService {
 	
 	//Instance Variables
-	HashMap<String, String> users = new HashMap<String, String>();
+	HashMap<String, Object> users = new HashMap<String, Object>();
+	HashSet<String> usernames = new HashSet<String>();
 	ArrayList<GameState> games = new ArrayList<GameState>();
 	
 	@Session
@@ -36,16 +39,15 @@ public class JoinGameService {
 			users.put("OWNER", message.getData().toString());
 		}
 		
-		//add user to map
-		if (users.containsKey(message.getClientId())){
-			users.put(message.getClientId(), message.getData().toString());
-			System.out.println("Added User: " + message.getData().toString() + " to the users list");
+		//add user to map -- assume username not in set
+		if(usernames.add(message.getData().toString())){
+			users.put("USERS", usernames);	
 		}
-		
 		//broadcast list to all users who are waiting
 		this.bayeux.createIfAbsent("/broadcast/waiting");		  
     	ServerChannel broadcastChannel = this.bayeux.getChannel("/broadcast/waiting");
     	broadcastChannel.publish(this.session, users , null);
+		
 	}
 	
 	//whenever owner starts a game
@@ -55,6 +57,9 @@ public class JoinGameService {
 		games.add(new DominionGameState(message.getClientId()));
 		
 		//broadcast to all users that a new game started
+		this.bayeux.createIfAbsent("/broadcast/waiting");
+		ServerChannel broadcastChannel = this.bayeux.getChannel("/broadcast/waiting");
+		//broadcastChannel.publish(this.session, some_message, null);
 		
 		//empty out the users list
 	}
