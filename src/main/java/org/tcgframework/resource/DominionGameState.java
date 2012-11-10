@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import com.google.gson.Gson;
+
 public class DominionGameState implements GameState{
 	
 	public int gameID;
@@ -57,8 +59,8 @@ public class DominionGameState implements GameState{
 		
 		//TODO: make toString for Cards
 		toReturn.put("playset", this.playset);
-		
-		return toReturn.toString().replace('=', ':');
+		Gson gson = new Gson();
+		return gson.toJson(toReturn);
 	}
 	
 	public static void main(String[] args){
