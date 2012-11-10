@@ -28,6 +28,9 @@ public class DominionGameState implements GameState{
 		phases.add("Cleanup Phase");
 		
 		//create the playset
+		playset.add(new GenericDominionCard("blah"));
+		playset.add(new GenericDominionCard("meh"));
+		playset.add(new GenericDominionCard("ahhhh"));
 	}
 	
 	public String getCurrentPlayer(){
@@ -55,7 +58,14 @@ public class DominionGameState implements GameState{
 		//TODO: make toString for Cards
 		toReturn.put("playset", this.playset);
 		
-		return toReturn.toString();
+		return toReturn.toString().replace('=', ':');
 	}
 	
+	public static void main(String[] args){
+		HashSet<String> usernames = new HashSet<String>();
+		usernames.add("jfkdla");
+		usernames.add("fjkdlaja");
+		DominionGameState state = new DominionGameState(0, usernames);
+		System.out.println(state.toString());
+	}
 }
