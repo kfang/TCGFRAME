@@ -9,22 +9,13 @@ import org.tcgframework.dominion.CopperCard;
 
 import com.google.gson.Gson;
 
-public class DominionGameState implements GameState{
+public class DominionGameState extends GameState{
 	
 	public HashMap<String, Card> cardObjSet = new HashMap<String, Card>();
 	
 	public int actions;
 	public int buys;
 	public int money;
-	
-	public int gameID;
-	public int currentPlayer;
-	public int currentPhase;
-	
-	public ArrayList<String> phases = new ArrayList<String>();
-	public ArrayList<String> hand = new ArrayList<String>();
-	public ArrayList<String> inPlay = new ArrayList<String>();
-	public ArrayList<Player> playerObj = new ArrayList<Player>();
 	
 	public DominionGameState(int gameID, HashSet<String> usernames){
 		//put cards into the cardObjSet--------------
@@ -33,11 +24,10 @@ public class DominionGameState implements GameState{
 		//-------------------------------------------
 		
 		this.gameID = gameID;
-		
+		this.players = new ArrayList<Player>();
 		//add all the users
 		for (String name : usernames){
-			this.players.add(name);
-			this.playerObj.add(new DominionPlayer(name));
+			this.players.add(new DominionPlayer(name));
 		}
 		currentPlayer = 0;
 		
@@ -49,16 +39,10 @@ public class DominionGameState implements GameState{
 		actions = 1;
 		buys = 1;
 		money = 0;
-		
-		this.hand = ((DominionPlayer) playerObj.get(currentPlayer)).hand;
 	}
 	
-	public String getCurrentPlayer(){
-		return players.get((currentPlayer % players.size()));
-	}
-	
-	public String getNextPlayer(){
-		return players.get(((currentPlayer + 1) % players.size()));
+	public DominionPlayer getCurrentPlayer(){
+		return (DominionPlayer) players.get(currentPlayer);
 	}
 	
 	public void nextPhase(){
@@ -80,17 +64,15 @@ public class DominionGameState implements GameState{
 		actions = 1;
 		buys = 1;
 		money = 0;
-		this.hand = ((DominionPlayer) playerObj.get(currentPlayer)).hand;
-		inPlay.clear();
 	}
 	
 	public void cleanup() {
-		DominionPlayer dominionPlayer = (DominionPlayer) playerObj.get(currentPlayer);
-		dominionPlayer.discard.addAll(this.hand);
-		dominionPlayer.discard.addAll(this.inPlay);
-		this.hand.clear();
-		this.inPlay.clear();
-		dominionPlayer.draw(5);
+		DominionPlayer player = (DominionPlayer) players.get(currentPlayer);
+		player.discard.addAll(player.hand);
+		player.discard.addAll(player.play);
+		player.hand.clear();
+		player.play.clear();
+		player.draw(5);
 	}
 	
 	@Override
@@ -101,13 +83,13 @@ public class DominionGameState implements GameState{
 		toReturn.put("currentPhase", this.currentPhase);
 		toReturn.put("phases", this.phases);
 		toReturn.put("players", this.players);
-		toReturn.put("inPlay", this.inPlay);
+		toReturn.put("inPlay", getCurrentPlayer().play);
 		toReturn.put("actions", this.actions);
 		toReturn.put("buys", this.buys);
 		toReturn.put("money", this.money);
 		
 		//TODO: make toString for Cards
-		toReturn.put("hand", this.hand);
+		toReturn.put("hand", getCurrentPlayer().hand);
 		Gson gson = new Gson();
 		return gson.toJson(toReturn);
 	}

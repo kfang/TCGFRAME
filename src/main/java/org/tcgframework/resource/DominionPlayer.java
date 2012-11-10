@@ -4,22 +4,19 @@ import java.util.ArrayList;
 
 import org.tcgframework.dominion.CopperCard;
 
-public class DominionPlayer implements Player{
+public class DominionPlayer extends Player {
 	
-	public String name;
 	public ArrayList<String> deck;
 	public ArrayList<String> discard;
+	public ArrayList<String> play;
 	public ArrayList<String> hand;
 	
 	public DominionPlayer(String name){
-		this.name = name;
+		this.username = name;
 		this.deck = new ArrayList<String>();
 		this.discard = new ArrayList<String>();
 		this.hand = new ArrayList<String>();
-		
-		Player.states.put("actions", 1);
-		Player.states.put("treasure", 0);
-		Player.states.put("buys", 1);
+		this.play = new ArrayList<String>();
 		
 		//TOOD: this shouldn't actually be how you populate your deck,
 		//but it works for now

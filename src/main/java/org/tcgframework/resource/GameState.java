@@ -2,9 +2,12 @@ package org.tcgframework.resource;
 
 import java.util.ArrayList;
 
-public interface GameState {
+public abstract class GameState {
 	
 	//player list
-	public ArrayList<String> players = new ArrayList<String>();
-	
+	public ArrayList<Player> players;
+	public int gameID;
+	public int currentPlayer;
+	public int currentPhase;
+	public final ArrayList<String> phases = new ArrayList<String>();
 }

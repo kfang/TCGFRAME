@@ -13,10 +13,7 @@ public class CopperCard extends Card {
 	
 	public void doCard(GameState state) {
 		DominionGameState Dstate = (DominionGameState) state;
-		Player player = Dstate.playerObj.get(Dstate.currentPlayer);
-		int treasure = (Integer) player.states.get("treasure");
-		treasure += 1;
-		player.states.put("treasure", treasure);
+		Player player = Dstate.players.get(Dstate.currentPlayer);
 		
 		((DominionGameState) state).money++;
 	}
