@@ -9,8 +9,8 @@ import com.google.gson.Gson;
 public class DominionGameState implements GameState{
 	
 	public int gameID;
-	private int currentPlayer;
-	private int currentPhase;
+	public int currentPlayer;
+	public int currentPhase;
 	public ArrayList<String> phases = new ArrayList<String>();
 	public ArrayList<String> hand = new ArrayList<String>();
 	public ArrayList<Card> inPlay = new ArrayList<Card>();
