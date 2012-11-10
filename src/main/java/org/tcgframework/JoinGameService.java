@@ -80,7 +80,7 @@ public class JoinGameService {
 		
 		if (message.getData().toString().equals("iam_ready")){
 			System.out.println("Channel: " + message.getChannel());
-			sender.deliver(this.session, message.getChannel(), state.players, null);
+			sender.deliver(this.session, message.getChannel(), state, "gamestate");
 		} else if (message.getData().toString().equals("phase_change")){
 			//progress phase
 			state.nextPhase();
