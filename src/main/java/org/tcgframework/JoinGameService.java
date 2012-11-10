@@ -47,11 +47,12 @@ public class JoinGameService {
 		this.bayeux.createIfAbsent("/broadcast/waiting");		  
     	ServerChannel broadcastChannel = this.bayeux.getChannel("/broadcast/waiting");
     	broadcastChannel.publish(this.session, users , null);
-		
+    	
+    	System.out.println("Broadcasted List of Users");
 	}
 	
 	//whenever owner starts a game
-	@Listener("/service/startgame")
+	@Listener("/broadcast/startgame")
 	public void startGame(ServerSession session, ServerMessage message){
 		//add a new game to games
 		games.add(new DominionGameState(message.getClientId()));
@@ -59,9 +60,19 @@ public class JoinGameService {
 		//broadcast to all users that a new game started
 		this.bayeux.createIfAbsent("/broadcast/waiting");
 		ServerChannel broadcastChannel = this.bayeux.getChannel("/broadcast/waiting");
-		//broadcastChannel.publish(this.session, some_message, null);
+		broadcastChannel.publish(this.session, message.getClientId(), "start");
 		
 		//empty out the users list
+		users.clear();
+		usernames.clear();
+		System.out.println("Game has started, Users has been cleared");
+	}
+	
+	//GAME LISTENERS
+	
+	@Listener("/game/*")
+	public void gameHandler(ServerSession session, ServerMessage message){
+
 	}
 	
 	

@@ -1,14 +1,15 @@
 package org.tcgframework.resource;
 
+import java.util.ArrayList;
+
 public class DominionGameState implements GameState{
 	
-	String owner;
+	public String gameID;
+	public ArrayList<String> players;
 	
-	public DominionGameState(String owner){
-		this.owner = owner;
+	public DominionGameState(String gameID){
+		this.gameID = gameID;
+		this.players = new ArrayList<String>();
 	}
 	
-	public String getOwner(){
-		return owner;
-	}
 }
