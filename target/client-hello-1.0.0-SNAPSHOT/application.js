@@ -17,10 +17,14 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     	}
     });
     
-    dom.byId('greeter').onclick = function()
-    {
-        cometd.publish('/service/hello', 'Hello, World');
-    };
+//    dom.byId('greeter').onclick = function()
+//    {
+//        cometd.publish('/service/hello', 'Hello, World');
+//    };
     
     cometd.handshake();
 });
+
+function get_a_group() {
+	document.cookie = "uName=" + document.getElementById("username").value
+}

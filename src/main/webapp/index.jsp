@@ -8,21 +8,30 @@
     The reason to use a JSP is that it is very easy to obtain server-side configuration
     information (such as the contextPath) and pass it to the JavaScript environment on the client.
     --%>
+    <link rel="stylesheet" href="bootstrap-combined.min.css" />
+    <link rel="stylesheet" href="style.css" />
     <script type="text/javascript">
         var config = {
             contextPath: '${pageContext.request.contextPath}'
         };
     </script>
-    <title>CometD Tutorial</title>
+    <title>Join a Game</title>
 </head>
 <body>
+	<div class="container centered hero-unit">
+		<h1 class="page-header">Join a Game</h1>
 
-    <h2>CometD Tutorial</h2>
-
-    <div id="status"></div>
-        <button id="greeter">
-        Send Hello to Server
-    </button>
-
+		<div class="input">
+			<form action="waiting" onsubmit="get_a_group();" method="post">
+				<div>
+					<span class="label label-info mylabel">Username:</span>
+					<input class="input" id="username" type="text" name="username"/>
+				</div>
+				<div>
+					<input class="btn btn-primary" type="submit" value="Join game" />
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
