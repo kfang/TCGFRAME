@@ -1,7 +1,10 @@
 var subscribed = false;
-
+var send_start;
 require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 {
+	send_start = function() {
+		cometd.publish('/broadcast/startgame', 'start');
+	}
     cometd.configure({
         url: location.protocol + '//' + location.host + config.contextPath + '/cometd',
         logLevel: 'info'
@@ -53,7 +56,6 @@ function update_users(event) {
 	// If I am the first person in the list, I get to choose to start the game.
 	if (event.data["OWNER"] === get_username()) {
 		var bDiv = document.getElementById("start_game");
-		bDiv.innerHTML = "\n<button>Start Game</button>\n";
+		bDiv.innerHTML = "\n<button onclick='send_start();'>Start Game</button>\n";
 	}
 }
-
