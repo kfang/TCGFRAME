@@ -81,7 +81,7 @@ public class DominionGameState implements GameState{
 		System.out.println(state.toString());
 	}
 
-	public void nextPhase(Integer integer) {
-		currentPhase = integer;
+	public void nextPhase(Long long1) {
+		currentPhase = (int) (long) long1;
 	}
 }
