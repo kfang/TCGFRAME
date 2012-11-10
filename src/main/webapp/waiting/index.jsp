@@ -13,8 +13,9 @@
 
 <body>
 	<h1>Waiting Page</h1>
+	<label>Waiting Users:</label>
 	<ul id="user_list"></ul>
-	<div><button id="hello_server">Hello, Server</button></div>
+	<div id="start_game"></div>
 </body>
 
 </html>
