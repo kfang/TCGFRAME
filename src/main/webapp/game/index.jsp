@@ -13,8 +13,12 @@
 
 <body>
 	<h1>Game Page</h1>
-	<label>Gaming Users:</label>
-	<ul id="user_list"></ul>
+	<div id="gs">
+		<div id="phases"></div>
+		<div id="stats"></div>
+		<div id="play"></div>
+		<div id="hand"></div>
+	</div>
 </body>
 
 </html>

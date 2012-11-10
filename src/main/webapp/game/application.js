@@ -13,8 +13,8 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     	{
     		console.log('CometD handshake successful');
     		if (!subscribed) {
-    			cometd.subscribe('/game/' + get_game_id(), receive_broadcast);
-    			cometd.publish('/game/' + get_game_id(), "list_users");
+    			cometd.subscribe('/game/' + gameid, receive_broadcast);
+    			cometd.publish('/game/' + gameid, "list_users");
     			subscribed = true;
     		}
     	}
@@ -36,16 +36,20 @@ function get_game_id() {
 		}
 	}
 }
+var gameid = get_game_id();
 
 function receive_broadcast(event) {
-	if (event.id !== undefined) {
+	if (event.id === "gamestate") {
+		// Display the gamestate stuff
+		var data = event.data;
+		var gs = document.getElementById("game_state");
+		gs.innerHTML = "\n";
+	} else if (event.id === "message") {
+		var data = event.data;
+		var ms = document.getElementById("message");
+		ms.innerHTML = data;
+	} else {
 		// Bad ids (some sort of response packet)
 		return;
-	}
-	var data = event.data;
-	var ul = document.getElementById("user_list");
-	ul.innerHTML = "\n";
-	for (i in data) {
-		ul.innerHTML += "<li>" + data[i] + "</li>\n";
 	}
 }
