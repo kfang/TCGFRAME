@@ -22,7 +22,7 @@ public class DominionPlayer implements Player{
 		Player.states.put("buys", 1);
 		
 		for (int i = 0; i < 10; i++){
-			deck.add("Copper");
+			deck.add("copper");
 		}
 		
 		draw(5);

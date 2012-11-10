@@ -49,7 +49,7 @@ function receive_broadcast(event) {
 		// Display the gamestate stuff
 		var data = JSON.parse(event.data);
 		var phdiv = document.getElementById("phases");
-		phdiv.innerHTML = "\n";
+		phdiv.innerHTML = "Currently in: " + data.phases[data.currentPhase] + "\n";
 		for (i in data.phases) {
 			var butt = "<button ";
 			if (i <= data.currentPhase) {
@@ -60,8 +60,19 @@ function receive_broadcast(event) {
 		}
 		var supplyDiv = document.getElementById("supply");
 		var statsDiv = document.getElementById("stats");
+		statsDiv.innerHTML = "<div>Actions: " + data.actions + "</div>\n";
+		statsDiv.innerHTML += "<div>Buys: " + data.buys + "</div>\n";
+		statsDiv.innerHTML += "<div>Money: " + data.money + "</div>\n";
 		var handDiv = document.getElementById("hand");
+		handDiv.innerHTML = "in hand:\n";
+		for (i in data.hand) {
+			handDiv.innerHTML += "<img width='148px' height='237px' border='0' src='cards/" + data.hand[i] + ".jpg' alt='" + data.hand[i] + "'/>";
+		}
 		var playDiv = document.getElementById("play");
+		playDiv.innerHTML = "in play:\n"
+		for (i in data.play) {
+			playDiv.innerHTML += "<img width='148px' height='237px' border='0' src='cards/" + data.play[i] + ".jpg' alt='" + data.play[i] + "'/>";
+		}
 	} else if (event.id === "message") {
 		var data = event.data;
 		var ms = document.getElementById("message");
