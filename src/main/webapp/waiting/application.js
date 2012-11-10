@@ -39,11 +39,11 @@ function get_username() {
 }
 
 function update_users(event) {
-	var pplList = event.data;
-	if (event.data !== undefined) {
+	if (event.id !== undefined) {
 		// Then it wasn't our message
 		return;
 	}
+	var pplList = event.data["USERS"];
 	var ul = document.getElementById("user_list");
 	// List all the peeps in the ul.
 	ul.innerHTML = "\n";
@@ -51,7 +51,7 @@ function update_users(event) {
 		ul.innerHTML += "<li>" + pplList[i] + "</li>\n";
 	}
 	// If I am the first person in the list, I get to choose to start the game.
-	if (pplList[0] === get_username()) {
+	if (event.data["OWNER"] === get_username()) {
 		var bDiv = document.getElementById("start_game");
 		bDiv.innerHTML = "\n<button>Start Game</button>\n";
 	}
