@@ -27,3 +27,6 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 function get_a_group() {
 	document.cookie = "uName=" + document.getElementById("username").value
 }
+
+console.log('hello world');
+console.log('meh');

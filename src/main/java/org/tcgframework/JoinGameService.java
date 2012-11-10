@@ -23,7 +23,7 @@ public class JoinGameService {
 	//Instance Variables
 	HashMap<String, Object> users = new HashMap<String, Object>();
 	HashSet<String> usernames = new HashSet<String>();
-	ArrayList<GameState> games = new ArrayList<GameState>();
+	HashMap<String, DominionGameState> games = new HashMap<String, DominionGameState>();
 	
 	@Session
 	private ServerSession session;
@@ -55,7 +55,7 @@ public class JoinGameService {
 	@Listener("/broadcast/startgame")
 	public void startGame(ServerSession session, ServerMessage message){
 		//add a new game to games
-		games.add(new DominionGameState(message.getClientId()));
+		games.put("game"+ message.getClientId(), new DominionGameState(message.getClientId(), usernames));
 		
 		//broadcast to all users that a new game started
 		this.bayeux.createIfAbsent("/broadcast/waiting");
@@ -71,8 +71,14 @@ public class JoinGameService {
 	//GAME LISTENERS
 	
 	@Listener("/game/*")
-	public void gameHandler(ServerSession session, ServerMessage message){
-
+	public void gameHandler(ServerSession sender, ServerMessage message){
+		System.out.println("caught a message");
+		DominionGameState state = games.get(message.getChannel());
+		
+		
+		if (message.getData().toString().equals("list_users")){
+			sender.deliver(this.session, message.getChannel(), state.usernames, null);
+		}
 	}
 	
 	
