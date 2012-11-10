@@ -57,7 +57,7 @@ public class DominionGameState implements GameState{
 		return players.get((currentPlayer % players.size()));
 	}
 	
-	public String getNextPlyaer(){
+	public String getNextPlayer(){
 		return players.get(((currentPlayer + 1) % players.size()));
 	}
 	
@@ -76,7 +76,7 @@ public class DominionGameState implements GameState{
 	public void passTurn(){
 		playerObj.get(currentPlayer).cleanup();
 		currentPhase = 0;
-		currentPlayer += 1;
+		currentPlayer = (currentPlayer + 1) % players.size();
 		actions = 1;
 		buys = 1;
 		money = 0;
