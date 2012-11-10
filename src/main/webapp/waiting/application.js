@@ -20,7 +20,6 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     });
     
     cometd.handshake();
-    fill_in_user();
 });
 
 function get_username() {
@@ -37,9 +36,15 @@ function get_username() {
 function update_users(event) {
 	var pplList = event.data;
 	var ul = document.getElementById("user_list");
+	// List all the peeps in the ul.
 	ul.innerHTML = "\n";
 	for (i in pplList) {
 		ul.innerHTML += "<li>" + pplList[i] + "</li>\n";
+	}
+	// If I am the first person in the list, I get to choose to start the game.
+	if (pplList[0] === get_username()) {
+		var bDiv = document.getElementById("start_game");
+		bDiv.innerHTML = "\n<button>Start Game</button>\n";
 	}
 }
 
