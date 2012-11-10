@@ -84,7 +84,15 @@ public class DominionGameState implements GameState{
 		inPlay.clear();
 	}
 	
-
+	public void cleanup() {
+		DominionPlayer dominionPlayer = (DominionPlayer) playerObj.get(currentPlayer);
+		dominionPlayer.discard.addAll(this.hand);
+		dominionPlayer.discard.addAll(this.inPlay);
+		this.hand.clear();
+		this.inPlay.clear();
+		dominionPlayer.draw(5);
+	}
+	
 	@Override
 	public String toString() {
 		HashMap<String, Object> toReturn = new HashMap<String, Object>();

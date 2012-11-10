@@ -34,10 +34,7 @@ public class DominionPlayer implements Player{
 		for(int i = 0; i < draws; i++){
 			String c = deck.remove(0);
 			if (c == null){
-				for (String d : discard){
-					//TODO: shuffling
-					deck.add(d);
-				}
+				deck.addAll(discard);
 				discard.clear();
 			} else {
 				hand.add(c);
