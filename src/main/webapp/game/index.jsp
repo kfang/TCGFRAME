@@ -4,6 +4,7 @@
 	<script data-dojo-config="async: true, tlmSiblingOfDojo: true, deps: ['application.js']"
             src="${pageContext.request.contextPath}/dojo/dojo.js.uncompressed.js"></script>
 	<title>Waiting Page</title>
+    <link rel="stylesheet" href="style.css" />
     <script type="text/javascript">
         var config = {
             contextPath: '${pageContext.request.contextPath}'
