@@ -49,15 +49,19 @@ function receive_broadcast(event) {
 		// Display the gamestate stuff
 		var data = JSON.parse(event.data);
 		var phdiv = document.getElementById("phases");
-		phases.innerHTML = "\n";
+		phdiv.innerHTML = "\n";
 		for (i in data.phases) {
 			var butt = "<button ";
 			if (i <= data.currentPhase) {
 				butt += "disabled='disabled'";
 			}
 			butt += " onclick='changePhase(" + i + ");'>" + data.phases[i] + "</button>\n";
-			phases.innerHTML += butt;
+			phdiv.innerHTML += butt;
 		}
+		var supplyDiv = document.getElementById("supply");
+		var statsDiv = document.getElementById("stats");
+		var handDiv = document.getElementById("hand");
+		var playDiv = document.getElementById("play");
 	} else if (event.id === "message") {
 		var data = event.data;
 		var ms = document.getElementById("message");
