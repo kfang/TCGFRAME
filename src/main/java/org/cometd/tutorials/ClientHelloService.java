@@ -48,7 +48,6 @@ public class ClientHelloService {
     	}
     	
     	broadcastChannel.publish(this.session, toSend, null);
-    	//sender.deliver(session, "/games", toSend, null);
     }
     
 }

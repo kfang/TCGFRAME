@@ -10,13 +10,17 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     	if (message.successful)
     	{
     		dom.byId('status').innerHTML += '<div>CometD handshake successful</div>';
+    	    cometd.subscribe('/broadcast/waiting', function(message){
+    	    	console.log(message);
+    	    });
+    	    
     	}
     	else
     	{
     		dom.byId('status').innerHTML += '<div>CometD handshake failed</div>';
     	}
     });
-    
+
     cometd.handshake();
 });
 
