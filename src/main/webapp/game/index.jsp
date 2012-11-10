@@ -13,15 +13,17 @@
 </head>
 
 <body>
-	<h1>Game Page</h1>
-	<div id="gs">
-		<div id="supply"></div>
-		<div id="phases"></div>
-		<div id="stats"></div>
-		<div id="play"></div>
-		<div id="hand"></div>
+	<div class="container">
+		<h1>Game Page</h1>
+		<div id="gs">
+			<div id="supply"></div>
+			<div id="phases"></div>
+			<div id="stats"></div>
+			<div id="play"></div>
+			<div id="hand"></div>
+		</div>
+		<div id="message"></div>
 	</div>
-	<div id="message"></div>
 </body>
 
 </html>

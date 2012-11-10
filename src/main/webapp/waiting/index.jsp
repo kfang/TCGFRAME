@@ -15,9 +15,9 @@
 
 <body><div class="hero-unit container centered">
 	<h1>Waiting Page</h1>
-	<div style="text-align:left">
+	<div style="text-align:center">
 	<br />
-	<label>Waiting Users:</label>
+	<label class="myLabel">Waiting Users:</label>
 	<ul id="user_list"></ul>
 	<div id="start_game"></div>
 	

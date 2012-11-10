@@ -56,11 +56,11 @@ function receive_broadcast(event) {
 	// List all the peeps in the ul.
 	ul.innerHTML = "\n";
 	for (i in pplList) {
-		ul.innerHTML += "<li>" + pplList[i] + "</li>\n";
+		ul.innerHTML += "<span class='label label-success'><li>" + pplList[i] + "</li></span>\n";
 	}
 	// If I am the first person in the list, I get to choose to start the game.
 	if (event.data["OWNER"] === get_username()) {
 		var bDiv = document.getElementById("start_game");
-		bDiv.innerHTML = "\n<button onclick='send_start();'>Start Game</button>\n";
+		bDiv.innerHTML = "\n<button class='btn btn-primary' onclick='send_start();'>Start Game</button>\n";
 	}
 }
