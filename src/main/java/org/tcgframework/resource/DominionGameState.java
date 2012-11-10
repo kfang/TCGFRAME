@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.tcgframework.dominion.CellarCard;
+import org.tcgframework.dominion.CopperCard;
+
 import com.google.gson.Gson;
 
 public class DominionGameState implements GameState{
+	
+	public HashMap<String, Card> cardObjSet = new HashMap<String, Card>();
 	
 	public int actions;
 	public int buys;
@@ -15,12 +20,18 @@ public class DominionGameState implements GameState{
 	public int gameID;
 	public int currentPlayer;
 	public int currentPhase;
+	
 	public ArrayList<String> phases = new ArrayList<String>();
 	public ArrayList<String> hand = new ArrayList<String>();
 	public ArrayList<String> inPlay = new ArrayList<String>();
 	public ArrayList<Player> playerObj = new ArrayList<Player>();
 	
 	public DominionGameState(int gameID, HashSet<String> usernames){
+		//put cards into the cardObjSet--------------
+		cardObjSet.put("copper", new CopperCard());
+		cardObjSet.put("cellar", new CellarCard());
+		//-------------------------------------------
+		
 		this.gameID = gameID;
 		
 		//add all the users
@@ -52,13 +63,26 @@ public class DominionGameState implements GameState{
 		currentPhase = currentPhase % phases.size();
 	}
 	
+	public void nextPhase(Long long1) {
+		currentPhase = (int) (long) long1;
+	}
+	
 	public void doCard(String card){
 		//add to in play
 		inPlay.add(card);
 		
 		//remove from hand
-		this.playerObj.indexOf(card);
+		this.hand.remove(this.playerObj.indexOf(card));
 		
+		//do what the card does
+		this.cardObjSet.get(card).doCard(this);	
+	}
+	
+	public void passTurn(){
+		playerObj.get(currentPlayer).cleanup();
+		currentPlayer += 1;
+		this.hand = ((DominionPlayer) playerObj.get(currentPlayer)).hand;
+		inPlay.clear();
 	}
 	
 
@@ -87,9 +111,5 @@ public class DominionGameState implements GameState{
 		usernames.add("fjkdlaja");
 		DominionGameState state = new DominionGameState(0, usernames);
 		System.out.println(state.toString());
-	}
-
-	public void nextPhase(Long long1) {
-		currentPhase = (int) (long) long1;
 	}
 }

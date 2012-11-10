@@ -44,5 +44,15 @@ public class DominionPlayer implements Player{
 			}
 		}
 	}
+
+	public void cleanup() {
+		if (!hand.isEmpty()){
+			this.discard.addAll(this.hand);
+			this.hand.clear();
+			draw(5);
+		} else {
+			draw(5);
+		}
+	}
 	
 }
