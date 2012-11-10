@@ -44,7 +44,7 @@ function get_username() {
 function receive_broadcast(event) {
 	if (event.id === "start") {
 		document.cookie = "gameid=" + event.data;
-		
+		dom.byId("game_form").submit();
 	}
 	else if (event.id !== undefined) {
 		// Then it wasn't our message

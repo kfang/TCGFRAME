@@ -16,6 +16,7 @@
 	<label>Waiting Users:</label>
 	<ul id="user_list"></ul>
 	<div id="start_game"></div>
+	<form id="game_form" action="game" method="post"></form>
 </body>
 
 </html>
