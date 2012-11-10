@@ -72,8 +72,7 @@ public class DominionGameState implements GameState{
 		inPlay.add(card);
 		
 		//remove from hand
-		
-		this.hand.remove(this.playerObj.indexOf(card));
+		this.hand.remove(card);
 		
 		//do what the card does
 		this.cardObjSet.get(card).doCard(this);	
