@@ -14,13 +14,18 @@ public abstract class GameState {
 	public int currentPlayer;
 	/** The index of the phase we are currently in in the phases list. */
 	public int currentPhase;
-	/** A list of all the phases in one turn.
+	/** A list of all the names of the phases in one turn.
 	 * The order is the order in which the phases happen. */
 	public final ArrayList<String> phases = new ArrayList<String>();
+	/** The current turnNumber (First turn is turn 0). */
+	public int turnNumber;
 
 	/** Call super with this constructor (always). */
 	public GameState(int id) {
-		this.gameID = id;
+		gameID = id;
+		turnNumber = 0;
+		currentPlayer = 0;
+		currentPhase = 0;
 	}
 
 	/**

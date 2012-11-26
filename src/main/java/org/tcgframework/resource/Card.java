@@ -10,10 +10,10 @@ public abstract class Card {
 	 */
 	public static final String VALID = "valid";
 	public String name;
-	public List<TriggerEff> tEffs = new ArrayList<TriggerEff>();
+	public List<TriggeredEff> tEffs = new ArrayList<TriggeredEff>();
 	public List<PersistentEff> pEffs = new ArrayList<PersistentEff>();
 	public List<ActivatedEff> aEffs = new ArrayList<ActivatedEff>();
-	
+
 	public abstract void playCard(GameState state);
 	public abstract String canPlay(GameState state);
 }

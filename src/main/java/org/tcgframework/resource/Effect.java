@@ -1,5 +1,5 @@
 package org.tcgframework.resource;
 
-public class TriggerEff {
+public class Effect {
 
 }

@@ -1,5 +1,5 @@
 package org.tcgframework.resource;
 
-public class PersistentEff {
+public class PersistentEff extends Effect {
 
 }

@@ -1,5 +1,5 @@
 package org.tcgframework.resource;
 
-public class ActivatedEff {
+public class ActivatedEff extends Effect{
 
 }
