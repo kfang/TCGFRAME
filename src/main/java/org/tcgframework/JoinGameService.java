@@ -15,9 +15,10 @@ import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
+import org.tcgframework.dominion.DominionGameState;
 import org.tcgframework.resource.Card;
-import org.tcgframework.resource.DominionGameState;
 import org.tcgframework.resource.GameState;
+import org.tcgframework.resource.Player;
 
 @Service
 public class JoinGameService {
@@ -83,35 +84,47 @@ public class JoinGameService {
 		if (message.getData().toString().equals("iam_ready")){
 			System.out.println("Channel: " + message.getChannel());
 			sender.deliver(this.session, message.getChannel(), state, "gamestate");
-		} else if (message.getData().toString().equals("phase_change")){
-			//progress phase
-			state.nextPhase();
-			
-			//send gamestate
-			ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
-			broadcastChannel.publish(this.session, state, "gamestate");
 		} else {
 			Map<String, Object> map = message.getDataAsMap();
-			System.out.println("Received map: " + map);
 			if (map.containsKey("do_card")){
+				boolean legal = checkUserTurn(state, map);
 				Card card = state.cardObjSet.get((String) map.get("do_card"));
 				String can = card.canPlay(state);
-				if (can.equals(Card.VALID)) {
+				if (can.equals(Card.VALID) && legal) {
 					state.getCurrentPlayer().hand.remove(card.name);
 					state.getCurrentPlayer().play.add(card.name);
 					card.doCard(state);
 					ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
 					broadcastChannel.publish(this.session, state, "gamestate");
-				} else {
+				} else if (legal) {
 					sender.deliver(this.session, message.getChannel(), can, "message");
+				} else {
+					sender.deliver(this.session, message.getChannel(), "It's not your turn", "message");
 				}
 			} else if (map.containsKey("phase_change")){
-				System.out.println("Sending a phase change.");
-				state.nextPhase((Long) map.get("phase_change"));
-				ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
-				broadcastChannel.publish(this.session, state, "gamestate");
+				boolean legal = checkUserTurn(state, map);
+				if (legal) {
+					state.nextPhase((Long) map.get("phase_change"));
+					ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
+					broadcastChannel.publish(this.session, state, "gamestate");
+				} else {
+					sender.deliver(this.session, message.getChannel(), "It's not your turn", "message");
+				}
 			}
 		}
+	}
+
+	private boolean checkUserTurn(DominionGameState state,
+			Map<String, Object> map) {
+		boolean legal = false;
+		for (int i = 0; i < state.players.size(); i++) {
+			Player p = state.players.get(i);
+			if (p.username.equals(map.get("user")) && state.currentPlayer == i) {
+				legal = true;
+				break;
+			}
+		}
+		return legal;
 	}
 	
 	

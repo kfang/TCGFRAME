@@ -1,8 +1,8 @@
-package org.tcgframework.resource;
+package org.tcgframework.dominion;
 
 import java.util.ArrayList;
 
-import org.tcgframework.dominion.CopperCard;
+import org.tcgframework.resource.Player;
 
 public class DominionPlayer extends Player {
 	
@@ -20,9 +20,16 @@ public class DominionPlayer extends Player {
 		
 		//TOOD: this shouldn't actually be how you populate your deck,
 		//but it works for now
-		for (int i = 0; i < 10; i++){
-			deck.add("copper");
-		}
+		deck.add("smithy");
+		deck.add("copper");
+		deck.add("copper");
+		deck.add("copper");
+		deck.add("copper");
+		deck.add("smithy");
+		deck.add("copper");
+		deck.add("copper");
+		deck.add("copper");
+		deck.add("copper");
 		
 		draw(5);
 	}

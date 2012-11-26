@@ -1,7 +1,7 @@
-package org.tcgframework.dominion;
+package org.tcgframework.dominion.cards;
 
+import org.tcgframework.dominion.DominionGameState;
 import org.tcgframework.resource.Card;
-import org.tcgframework.resource.DominionGameState;
 import org.tcgframework.resource.GameState;
 import org.tcgframework.resource.Player;
 

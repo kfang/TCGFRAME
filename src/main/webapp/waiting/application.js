@@ -34,7 +34,6 @@ function get_username() {
 	var kvpairs = document.cookie.split("; ");
 	for (i in kvpairs) {
 		kvpair = kvpairs[i].split("=");
-//		kvpair[0] = kvpair[0].replace(/\s+/g, '');
 		if (kvpair[0] === "uName") {
 			return kvpair[1];
 		}
@@ -56,7 +55,7 @@ function receive_broadcast(event) {
 	// List all the peeps in the ul.
 	ul.innerHTML = "\n";
 	for (i in pplList) {
-		ul.innerHTML += "<span class='label label-success'><li>" + pplList[i] + "</li></span>\n";
+		ul.innerHTML += "<li class='li-center'><span class='label label-success'>" + pplList[i] + "</span></li>\n";
 	}
 	// If I am the first person in the list, I get to choose to start the game.
 	if (event.data["OWNER"] === get_username()) {

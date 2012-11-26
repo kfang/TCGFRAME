@@ -8,3 +8,13 @@
 .mylabel {
 	font-size: 16px;
 }
+
+.li-center {
+	width: 70px;
+	margin: auto;
+	text-align: left;
+}
+
+#user-list {
+	padding-bottom: 15px;
+}

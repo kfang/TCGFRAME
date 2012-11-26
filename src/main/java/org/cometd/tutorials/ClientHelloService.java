@@ -11,7 +11,7 @@ import org.cometd.bayeux.server.BayeuxServer;
 import org.cometd.bayeux.server.ServerChannel;
 import org.cometd.bayeux.server.ServerMessage;
 import org.cometd.bayeux.server.ServerSession;
-import org.tcgframework.resource.DominionGameState;
+import org.tcgframework.dominion.DominionGameState;
 import org.tcgframework.resource.GameState;
 
 @Service

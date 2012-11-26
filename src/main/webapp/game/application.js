@@ -6,12 +6,14 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
 {
 	doCard = function(card) {
 		cometd.publish('/game/' + gameid, {
-			do_card: card
+			do_card: card,
+			user: userid
 		});
 	}
     changePhase = function(phase) {
         cometd.publish('/game/' + gameid, {
-        	phase_change: phase
+        	phase_change: phase,
+        	user: userid
         });
     }
     cometd.configure({
@@ -39,6 +41,16 @@ require(['dojox/cometd', 'dojo/dom', 'dojo/domReady!'], function(cometd, dom)
     cometd.handshake();
 });
 
+function get_username() {
+	var kvpairs = document.cookie.split("; ");
+	for (i in kvpairs) {
+		kvpair = kvpairs[i].split("=");
+		if (kvpair[0] === "uName") {
+			return kvpair[1];
+		}
+	}
+}
+var userid = get_username();
 function get_game_id() {
 	var kvpairs = document.cookie.split("; ");
 	for (i in kvpairs) {

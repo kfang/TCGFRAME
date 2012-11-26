@@ -1,11 +1,15 @@
-package org.tcgframework.resource;
+package org.tcgframework.dominion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.tcgframework.dominion.CellarCard;
-import org.tcgframework.dominion.CopperCard;
+import org.tcgframework.dominion.cards.CellarCard;
+import org.tcgframework.dominion.cards.CopperCard;
+import org.tcgframework.dominion.cards.SmithyCard;
+import org.tcgframework.resource.Card;
+import org.tcgframework.resource.GameState;
+import org.tcgframework.resource.Player;
 
 import com.google.gson.Gson;
 
@@ -21,6 +25,7 @@ public class DominionGameState extends GameState{
 		//put cards into the cardObjSet--------------
 		cardObjSet.put("copper", new CopperCard());
 		cardObjSet.put("cellar", new CellarCard());
+		cardObjSet.put("smithy", new SmithyCard());
 		//-------------------------------------------
 		
 		this.gameID = gameID;
@@ -41,23 +46,7 @@ public class DominionGameState extends GameState{
 		money = 0;
 	}
 	
-	public DominionPlayer getCurrentPlayer(){
-		return (DominionPlayer) players.get(currentPlayer);
-	}
-	
-	public void nextPhase(){
-		currentPhase++;
-		currentPhase = currentPhase % phases.size();
-	}
-	
-	public void nextPhase(Long long1) {
-		currentPhase = (int) (long) long1;
-		if (currentPhase == 2) {
-			passTurn();
-		}
-	}
-	
-	public void passTurn(){
+	public void passTurn() {
 		cleanup();
 		currentPhase = 0;
 		currentPlayer = (currentPlayer + 1) % players.size();
