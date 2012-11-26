@@ -22,13 +22,13 @@ public class DominionGameState extends GameState{
 	public int money;
 	
 	public DominionGameState(int gameID, HashSet<String> usernames){
+		super(gameID);
 		//put cards into the cardObjSet--------------
 		cardObjSet.put("copper", new CopperCard());
 		cardObjSet.put("cellar", new CellarCard());
 		cardObjSet.put("smithy", new SmithyCard());
 		//-------------------------------------------
 		
-		this.gameID = gameID;
 		this.players = new ArrayList<Player>();
 		//add all the users
 		for (String name : usernames){

@@ -93,7 +93,7 @@ public class JoinGameService {
 				if (can.equals(Card.VALID) && legal) {
 					state.getCurrentPlayer().hand.remove(card.name);
 					state.getCurrentPlayer().play.add(card.name);
-					card.doCard(state);
+					card.playCard(state);
 					ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
 					broadcastChannel.publish(this.session, state, "gamestate");
 				} else if (legal) {
@@ -104,7 +104,7 @@ public class JoinGameService {
 			} else if (map.containsKey("phase_change")){
 				boolean legal = checkUserTurn(state, map);
 				if (legal) {
-					state.nextPhase((Long) map.get("phase_change"));
+					state.skipToPhase((Long) map.get("phase_change"));
 					ServerChannel broadcastChannel = this.bayeux.getChannel(message.getChannel());
 					broadcastChannel.publish(this.session, state, "gamestate");
 				} else {

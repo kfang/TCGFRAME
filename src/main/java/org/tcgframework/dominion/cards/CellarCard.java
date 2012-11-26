@@ -10,7 +10,7 @@ public class CellarCard extends Card{
 		this.name = "cellar";
 	}
 	
-	public void doCard(GameState state) {
+	public void playCard(GameState state) {
 		// TODO Auto-generated method stub
 		
 	}

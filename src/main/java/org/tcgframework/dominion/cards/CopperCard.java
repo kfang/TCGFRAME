@@ -11,7 +11,7 @@ public class CopperCard extends Card {
 		this.name = "copper";
 	}
 	
-	public void doCard(GameState state) {
+	public void playCard(GameState state) {
 		DominionGameState Dstate = (DominionGameState) state;
 		Player player = Dstate.players.get(Dstate.currentPlayer);
 		

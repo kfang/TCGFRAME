@@ -7,7 +7,7 @@ import org.tcgframework.resource.GameState;
 public class SmithyCard extends Card {
 
 	@Override
-	public void doCard(GameState state) {
+	public void playCard(GameState state) {
 		DominionGameState dstate = (DominionGameState) state;
 		state.getCurrentPlayer().draw(3);
 		dstate.actions--;
